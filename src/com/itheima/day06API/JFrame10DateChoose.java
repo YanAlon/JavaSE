@@ -32,8 +32,8 @@ public class JFrame10DateChoose {
         startDateLable.setBounds(50, 70, 100, 20);
         jf.add(startDateLable);
 
-        DateChooser dateChooser1 = DateChooser.getInstance("yyyy/MM/dd");
-        DateChooser dateChooser2 = DateChooser.getInstance("yyyy/MM/dd");
+        JFrame10DateChooser dateChooser1 = JFrame10DateChooser.getInstance("yyyy/MM/dd");
+        JFrame10DateChooser dateChooser2 = JFrame10DateChooser.getInstance("yyyy/MM/dd");
         //开始时间输入框
         JTextField startDateField = new JTextField();
         startDateField.setBounds(50, 100, 100, 20);
