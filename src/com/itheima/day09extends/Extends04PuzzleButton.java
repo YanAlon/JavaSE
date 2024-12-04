@@ -3,17 +3,17 @@ package com.itheima.day09extends;
 import javax.swing.*;
 import java.util.Random;
 
-public class Extends03PuzzleDisruption extends JFrame {
+public class Extends04PuzzleButton extends JFrame {
 
     // 将图片遍历提级到成员变量
     private int[][] pictures = {
-        {0, 1, 2, 3},
-        {4, 5, 6, 7},
-        {8, 9, 10, 11},
-        {12, 13, 14, 15}
+            {0, 1, 2, 3},
+            {4, 5, 6, 7},
+            {8, 9, 10, 11},
+            {12, 13, 14, 15}
     };
 
-    public Extends03PuzzleDisruption() {
+    public Extends04PuzzleButton() {
         initPuzzle();
 
         randomPicture();
