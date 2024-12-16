@@ -3,17 +3,25 @@ package com.itheima.day09extends;
 import javax.swing.*;
 import java.util.Random;
 
-public class Extends04PuzzleButton extends JFrame {
+public class Extends04PuzzleZero extends JFrame {
 
     // 将图片遍历提级到成员变量
     private int[][] pictures = {
-            {0, 1, 2, 3},
-            {4, 5, 6, 7},
-            {8, 9, 10, 11},
-            {12, 13, 14, 15}
+            {1, 2, 3, 4},
+            {5, 6, 7, 8},
+            {9, 10, 11, 12},
+            {13, 14, 15, 0}
     };
 
-    public Extends04PuzzleButton() {
+    /*
+        记录0号的位置
+        x0：在哪个一维数组
+        y0：在一维数组的位置
+     */
+    private int x0;
+    private int y0;
+
+    public Extends04PuzzleZero() {
         initPuzzle();
 
         randomPicture();
@@ -35,7 +43,7 @@ public class Extends04PuzzleButton extends JFrame {
         gameJP.setLayout(null);
         for (int i = 0; i < pictures.length; i++) {
             for (int j = 0; j < pictures[i].length; j++) {
-                System.out.println(pictures[i][j]);
+//                System.out.println(pictures[i][j]);
                 JLabel segmentPicture = new JLabel(new ImageIcon("src\\com\\itheima\\day09Extends\\images\\" + pictures[i][j] + ".png"));
                 segmentPicture.setBounds(j * 90, i * 90, 90, 90);
                 gameJP.add(segmentPicture);
@@ -95,11 +103,24 @@ public class Extends04PuzzleButton extends JFrame {
                 int temp = pictures[i][j];
                 pictures[i][j] = pictures[x][y];
                 pictures[x][y] = temp;
-                System.out.println(pictures[i][j]);
+//                System.out.println(pictures[i][j]);
             }
         }
 
-
-
+        /*
+            遍历打乱后的数组，定位0号的位置
+            lo：循环标号，给循环气的名字，当break时，该循环结束
+         */
+         lo:
+         for (int i = 0; i < pictures.length; i++) {
+             for (int j = 0; j < pictures[i].length; j++) {
+                 if (pictures[i][j] == 0) {
+                     x0 = i;
+                     y0 = j;
+                     break lo;
+                 }
+             }
+         }
+        System.out.println(x0 + " " + y0);
     }
 }
