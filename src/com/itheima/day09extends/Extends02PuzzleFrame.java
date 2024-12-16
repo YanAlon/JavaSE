@@ -16,12 +16,28 @@ public class Extends02PuzzleFrame extends JFrame {
 
         // 标题图片
         JLabel titlePictureJL = new JLabel(new ImageIcon("src\\com\\itheima\\day09Extends\\images\\title.png"));
-        titlePictureJL.setBounds(354, 27, 232, 57);
+        titlePictureJL.setBounds(254, 27, 232, 57);
         this.add(titlePictureJL);
         // 面板图
+        // 存储16份小图
+        int[][] pictures = {
+                {1, 2, 3, 4},
+                {5, 6, 7, 8},
+                {9, 10, 11, 12},
+                {13, 14, 15, 16}
+        };
+        // 绘制面板
         JPanel gameJP = new JPanel();
         gameJP.setBounds(150, 114, 360, 360);
-        this.setLayout(null);
+        gameJP.setLayout(null);
+        // 面板分割为16份小面板，并添加对应的图片
+        for (int i = 0; i < pictures.length; i++) {
+            for (int j = 0; j < pictures[i].length; j++) {
+                JLabel segmentPicture = new JLabel(new ImageIcon("src\\com\\itheima\\day09Extends\\images\\" + pictures[i][j] +".png"));
+                segmentPicture.setBounds(j * 90, i * 90, 90, 90);
+                gameJP.add(segmentPicture);
+            }
+        }
         this.add(gameJP);
         // 参照图
         JLabel referenceJL = new JLabel(new ImageIcon("src\\com\\itheima\\day09extends\\images\\reference.png"));
