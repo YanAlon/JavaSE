@@ -10,6 +10,7 @@ public class Extends02GameStart {
             case "2": Extends02PuzzleFrame puzzleFrame = new Extends02PuzzleFrame();
             case "3": Extends03PuzzleDisruption puzzleDisruption = new Extends03PuzzleDisruption();
             case "4": Extends04PuzzleZero puzzleZero = new Extends04PuzzleZero();
+            case "5": Extends05PuzzleButton puzzleButton = new Extends05PuzzleButton();
         }
 
     }
