@@ -1,31 +1,19 @@
 package com.itheima.day09extends;
 /*
-    图片上移动, 就是让0号图片和下方图片交换
-        0号图片坐标为
-            datas[x0][y0]
-        0号图片下方图片坐标为
-            datas[x0+1][y0]
-
-    在"上"的按钮事件的代码中
-        1.边界处理, 当x0=3, 不能继续向上移动
-        2.交换0号图片和下方图片 (代码先抄下来,慢慢理解)
-            datas[x0][y0] = datas[x0+1][y0];
-            datas[x0+1][y0] = 0;
-            x0=x0+1;
-        3.编写并调用重绘的方法rePainView()
-
-    重绘的方法rePainView()
-        1.将imagePanel提升到成员位置
-        2.调用imagePanel的removeAll()方法移除所有组件
-        3.拼图重绘的代码(复制之前写好的)
-        4.调用imagePanel的repaint()方法重绘窗体
+     判断游戏是否成功
+        定义游戏成功的winDatas数组,前15张图片到位
+        定义方法isSuccess判断游戏是否成功
+            遍历任意一个数组
+            如果有一个元素不一样,返回false
+            都一样则返回true
+        在每次移动(按钮事件)后调用方法判断
  */
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
-public class Extends06PuzzleExchange extends JFrame {
+public class Extends08PuzzleSuccess extends JFrame {
 
     // 图片编号数组
     private int[][] pictures = {
@@ -34,6 +22,15 @@ public class Extends06PuzzleExchange extends JFrame {
             {9, 10, 11, 12},
             {13, 14, 15, 0}
     };
+
+    // 定义成功
+    private int[][] winPictures = {
+            {1, 2, 3, 4},
+            {5, 6, 7, 8},
+            {9, 10, 11, 12},
+            {13, 14, 15, 0}
+    };
+
     // 记录0号图片
     // x0：在哪一维数组；y0：在一维数组的位置。
     private int x0;
@@ -64,6 +61,32 @@ public class Extends06PuzzleExchange extends JFrame {
         gameJP.repaint(); // Java提供的重绘方法
     }
 
+    private void help() {
+        pictures = new int[][] {
+                {1, 2, 3, 4},
+                {5, 6, 7, 8},
+                {9, 10, 11, 12},
+                {13, 14, 15, 16}
+        };
+        // 设置上下左右按钮失效
+        upJB.setEnabled(false);
+        downJB.setEnabled(false);
+        leftJB.setEnabled(false);
+        rightJB.setEnabled(false);
+    }
+
+    public boolean isSuccess() {
+        for (int i = 0; i < pictures.length; i++) {
+            for (int j = 0; j < pictures[i].length; j++) {
+                // 如果有一个不同，则说明未成功
+                if (pictures[i][j] != winPictures[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     // 给Up按钮添加
     private void addButtonEvent() {
         upJB.addActionListener(new ActionListener() {
@@ -79,6 +102,12 @@ public class Extends06PuzzleExchange extends JFrame {
                 pictures[x0][y0] = pictures[x0 - 1][y0];
                 pictures[x0 - 1][y0] = 0;
                 x0 = x0 - 1;
+
+                //调用方法判断,如果游戏成功,设置按钮不能点击
+                if (isSuccess()) {
+                    help();
+                }
+
                 // 3.重绘方法
                 rePaintView();
             }
@@ -96,6 +125,12 @@ public class Extends06PuzzleExchange extends JFrame {
                 pictures[x0][y0] = pictures[x0 + 1][y0];
                 pictures[x0 + 1][y0] = 0;
                 x0 = x0 + 1;
+
+                //调用方法判断,如果游戏成功,设置按钮不能点击
+                if (isSuccess()) {
+                    help();
+                }
+
                 // 3.重绘方法
                 rePaintView();
             }
@@ -113,6 +148,12 @@ public class Extends06PuzzleExchange extends JFrame {
                 pictures[x0][y0] = pictures[x0][y0 - 1];
                 pictures[x0][y0 - 1] = 0;
                 y0 = y0 - 1;
+
+                //调用方法判断,如果游戏成功,设置按钮不能点击
+                if (isSuccess()) {
+                    help();
+                }
+
                 // 3.重绘方法
                 rePaintView();
             }
@@ -130,6 +171,12 @@ public class Extends06PuzzleExchange extends JFrame {
                 pictures[x0][y0] = pictures[x0][y0 + 1];
                 pictures[x0][y0 + 1] = 0;
                 y0 = y0 + 1;
+
+                //调用方法判断,如果游戏成功,设置按钮不能点击
+                if (isSuccess()) {
+                    help();
+                }
+
                 // 3.重绘方法
                 rePaintView();
             }
@@ -137,7 +184,9 @@ public class Extends06PuzzleExchange extends JFrame {
         helpJB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Help");
+//                System.out.println("Help");
+                help();
+                rePaintView();
             }
         });
         resetJB.addActionListener(new ActionListener() {
@@ -149,7 +198,7 @@ public class Extends06PuzzleExchange extends JFrame {
     }
 
     // 构造类
-    public Extends06PuzzleExchange() {
+    public Extends08PuzzleSuccess() {
         initPuzzle();
 
         randomPicture();

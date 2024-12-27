@@ -1,31 +1,17 @@
 package com.itheima.day09extends;
 /*
-    图片上移动, 就是让0号图片和下方图片交换
-        0号图片坐标为
-            datas[x0][y0]
-        0号图片下方图片坐标为
-            datas[x0+1][y0]
-
-    在"上"的按钮事件的代码中
-        1.边界处理, 当x0=3, 不能继续向上移动
-        2.交换0号图片和下方图片 (代码先抄下来,慢慢理解)
-            datas[x0][y0] = datas[x0+1][y0];
-            datas[x0+1][y0] = 0;
-            x0=x0+1;
-        3.编写并调用重绘的方法rePainView()
-
-    重绘的方法rePainView()
-        1.将imagePanel提升到成员位置
-        2.调用imagePanel的removeAll()方法移除所有组件
-        3.拼图重绘的代码(复制之前写好的)
-        4.调用imagePanel的repaint()方法重绘窗体
+     求助按钮
+        1.按钮求助事件代码中,提供方法success(),方法中完成
+            将二维数组datas元素重置为,编号为1到16的图片
+            设置上左下右按钮失效
+        2.调用重绘的方法rePainView()
  */
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
-public class Extends06PuzzleExchange extends JFrame {
+public class Extends07PuzzleHelp extends JFrame {
 
     // 图片编号数组
     private int[][] pictures = {
@@ -62,6 +48,20 @@ public class Extends06PuzzleExchange extends JFrame {
         }
         this.add(gameJP);
         gameJP.repaint(); // Java提供的重绘方法
+    }
+
+    private void help() {
+        pictures = new int[][] {
+                {1, 2, 3, 4},
+                {5, 6, 7, 8},
+                {9, 10, 11, 12},
+                {13, 14, 15, 16}
+        };
+        // 设置上下左右按钮失效
+        upJB.setEnabled(false);
+        downJB.setEnabled(false);
+        leftJB.setEnabled(false);
+        rightJB.setEnabled(false);
     }
 
     // 给Up按钮添加
@@ -137,7 +137,9 @@ public class Extends06PuzzleExchange extends JFrame {
         helpJB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Help");
+//                System.out.println("Help");
+                help();
+                rePaintView();
             }
         });
         resetJB.addActionListener(new ActionListener() {
@@ -149,7 +151,7 @@ public class Extends06PuzzleExchange extends JFrame {
     }
 
     // 构造类
-    public Extends06PuzzleExchange() {
+    public Extends07PuzzleHelp() {
         initPuzzle();
 
         randomPicture();
