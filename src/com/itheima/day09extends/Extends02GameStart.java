@@ -14,6 +14,7 @@ public class Extends02GameStart {
             case "6": Extends06PuzzleExchange puzzleExchange = new Extends06PuzzleExchange();
             case "7": Extends07PuzzleHelp puzzleHelp = new Extends07PuzzleHelp();
             case "8": Extends08PuzzleSuccess puzzleSuccess = new Extends08PuzzleSuccess();
+            case "9": Extends09PuzzleReSet puzzleReSet = new Extends09PuzzleReSet();
         }
     }
 }
